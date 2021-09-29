@@ -9,7 +9,7 @@ To communicate with the FI API you need to register your Authentication Profile 
 ## Create a Certificate
 A basic certificate can be created using OpenSSL. In test environments CSRs can be generated using Open Source solutions (such as OpenSSL) but production has stricter requirements.
 
-From the commandline navigate to a directory where you have read/write permissions. Running the following script will generate a `<name>.csr` and `<name>.Key` file that you wil need to access later. Once generated make sure you store these files somewhere safe.
+From the commandline navigate to a directory where you have read/write permissions. Running the following script will generate a `<name>.csr` and `<name>.Key` file that you wil need to access later.
 
 ```powershell
 openssl req -out .\<name>.csr -new -sha256 -newkey rsa:2048 -nodes -subj "/ST=localhost/L=localhost/CN=localhost/" -keyout .\<name>.key
