@@ -1,7 +1,7 @@
 # fi-api-postman
 This repository contains Postman collections for integrating with the FI API.
 
-A more detailed blog post about Self-Signing requests in Postman can be found [here]().
+A more detailed blog post about Self-Signing requests in Postman can be found [here](https://clear.bank/newsroom/tags/tech).
 
 ## Getting Started
 To communicate with the FI API you need to register your Authentication Profile with the Clear Bank platform. This guide contains a quick how-to for setting up a basic Authentication Profile for a test environment. More information about Authentication Profiles and the configuration required for production can be found on our [Developer Guide](https://clearbank.github.io/docs/introduction/#creating-your-authentication-profile).
@@ -32,7 +32,7 @@ Log in to the Clear Bank portal and navigate to `Institution > Certificates and 
 5.  Make the request
 
 ### Notes
-In order to sign the request body we're utalising a third-party utility which can be found [here](https://joolfe.github.io/postman-util-lib/). The [javascript bundle](https://joolfe.github.io/postman-util-lib/dist/bundle.js) has already been included in the environment variables but more information about importing this bundle can be found [here](https://joolfe.github.io/postman-util-lib/#installation).
+In order to sign the request body we're utalising a third-party utility which can be found [here](https://joolfe.github.io/postman-util-lib/). The [javascript bundle](https://joolfe.github.io/postman-util-lib/dist/bundle.js) needs to be stored in an environment variable so that it can be accessed in the Pre-Request scripts. More information about importing this bundle can be found [here](https://joolfe.github.io/postman-util-lib/#installation).
 
 ## Gotcha's
 
