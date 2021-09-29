@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "0c767f48-210a-4a60-b898-29684853ac63",
+		"name": "Clear.Bank FI API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"item": [
+				{
+					"name": "Test",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Request-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fieldName\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fi-api-baseUrl}}/v1/test",
+							"host": [
+								"{{fi-api-baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{fi-api-baseUrl}}/v1/test",
+							"host": [
+								"{{fi-api-baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{fi-api-authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"eval(pm.globals.get('pmlib_code'))",
+					"var CryptoJS = require(\"crypto-js\");",
+					"var Property = require('postman-collection').Property;",
+					"",
+					"var sig = new pmlib.rs.KJUR.crypto.Signature({\"alg\": \"SHA256withRSA\"});",
+					"sig.init(pm.environment.get(\"fi-api-privateKey\").replace(/\\\\n/g, \"\\n\"));",
+					"",
+					"var requestBody = Property.replaceSubstitutions(pm.request.body.raw || \"\", pm.variables.toObject())",
+					"var hash = sig.signString(requestBody);",
+					"",
+					"const signedEncoded = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Hex.parse(hash));",
+					"",
+					"pm.request.headers.add({",
+					"    key: 'DigitalSignature',",
+					"    value: signedEncoded",
+					"});",
+					"",
+					"pm.request.body.update(requestBody);",
+					"",
+					"if (!pm.request.headers.has(\"Content-Type\"))",
+					"{",
+					"    pm.request.headers.add({",
+					"        key: 'Content-Type',",
+					"        value: \"application/json\"",
+					"    });",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
