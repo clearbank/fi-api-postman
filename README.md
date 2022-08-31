@@ -1,7 +1,7 @@
 # fi-api-postman
 This repository contains Postman collections for integrating with the FI API.
 
-A more detailed blog post about Self-Signing requests in Postman can be found [here](https://clear.bank/newsroom/self-signing-requests-in-postman).
+A more detailed blog post about Self-Signing requests in Postman can be found [here](https://medium.com/clearbank/self-signing-requests-in-postman-d80f1d44da72).
 
 ## Getting Started
 To communicate with the FI API you need to register your Authentication Profile with the Clear Bank platform. This guide contains a quick how-to for setting up a basic Authentication Profile for a test environment. More information about Authentication Profiles and the configuration required for production can be found on our [Developer Guide](https://clearbank.github.io/docs/introduction/#creating-your-authentication-profile).
